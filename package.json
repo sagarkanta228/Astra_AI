@@ -1,0 +1,16 @@
+{
+  "name": "astra-ai-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ASTRA AI - Autonomous Security & Threat Response AI Platform",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:next": "npm --prefix frontend-next run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:python": "cd backend-django && python manage.py runserver 0.0.0.0:8000",
+    "dev:go": "cd backend-go && go run main.go",
+    "app:launch": "ASTRA_AI.bat",
+    "app:build": "python build_exe.py",
+    "build": "npm --prefix frontend run build"
+  }
+}
