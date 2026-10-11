@@ -5,7 +5,7 @@ export default function NodesModal({ onClose }) {
   const [nodes, setNodes] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/v1/telemetry/nodes')
+    axios.get('http://localhost:8000/api/v1/telemetry/nodes')
       .then(res => setNodes(res.data))
       .catch(() => {
         setNodes([

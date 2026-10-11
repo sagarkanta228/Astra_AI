@@ -48,3 +48,20 @@ class AuditLog(models.Model):
 
     def __str__(self):
         return f"{self.actor} - {self.action}"
+
+class UserAccount(models.Model):
+    user_id = models.CharField(max_length=64, primary_key=True)
+    full_name = models.CharField(max_length=128)
+    email = models.CharField(max_length=128, unique=True)
+    password = models.CharField(max_length=128)
+    role = models.CharField(max_length=32, default="USER")
+    title = models.CharField(max_length=128, default="Standard User")
+    department = models.CharField(max_length=128, default="Operations")
+    device = models.CharField(max_length=128, default="Managed Device")
+    status = models.CharField(max_length=32, default="ACTIVE")
+    avatar_url = models.CharField(max_length=255, blank=True, default="")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.full_name} ({self.email}) - {self.role}"
+

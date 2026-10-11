@@ -31,11 +31,18 @@ export default function AdminDashboard({ setActiveView, setSelectedIncidentId })
             Enterprise Security <span className="text-[#ef4444]">SOC Console</span>
           </h1>
           <p className="text-sm text-[#94a3b8]">
-            Real-time autonomous threat detection, incident triage, and explainable AI countermeasure engine.
+            Enterprise SOC console for real-time threat detection, incident triage, user access provisioning, and security response orchestration.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            className="px-4 py-2.5 rounded-xl bg-[#3b82f6] text-white font-mono text-xs font-bold hover:bg-[#2563eb] transition-all cursor-pointer border-0 shadow-[0_0_15px_rgba(59,130,246,0.3)] flex items-center gap-2"
+            onClick={() => setActiveView('admin-users')}
+          >
+            <span className="material-symbols-outlined text-[18px]">manage_accounts</span>
+            <span>USER MANAGEMENT</span>
+          </button>
           <button
             className="px-4 py-2.5 rounded-xl bg-[#1e2638] text-white font-mono text-xs font-bold hover:bg-[#2a3449] transition-all cursor-pointer border-0 flex items-center gap-2"
             onClick={() => setActiveView('admin-live-monitor')}

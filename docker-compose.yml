@@ -1,71 +1,28 @@
 version: '3.8'
 
 services:
-  database:
-    image: postgres:15-alpine
-    container_name: cybershield-db
-    environment:
-      POSTGRES_DB: cybershield_db
-      POSTGRES_USER: cybershield_user
-      POSTGRES_PASSWORD: cybershield_secure_password_2026
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./database/001_init.sql:/docker-entrypoint-initdb.d/001_init.sql
-      - ./database/002_seed.sql:/docker-entrypoint-initdb.d/002_seed.sql
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U cybershield_user -d cybershield_db"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
-  backend-go:
+  backend-django:
     build:
-      context: ./backend-go
+      context: ./backend-django
       dockerfile: Dockerfile
-    container_name: cybershield-go-core
-    ports:
-      - "8080:8080"
-    environment:
-      - PORT=8080
-      - DB_HOST=database
-      - DB_PORT=5432
-      - DB_USER=cybershield_user
-      - DB_PASSWORD=cybershield_secure_password_2026
-      - DB_NAME=cybershield_db
-    depends_on:
-      database:
-        condition: service_healthy
-
-  backend-python:
-    build:
-      context: ./backend-python
-      dockerfile: Dockerfile
-    container_name: cybershield-python-ai
+    container_name: astra-django-backend
     ports:
       - "8000:8000"
     environment:
-      - PORT=8000
-      - DB_HOST=database
-      - DB_PORT=5432
-      - DB_USER=cybershield_user
-      - DB_PASSWORD=cybershield_secure_password_2026
-      - DB_NAME=cybershield_db
-    depends_on:
-      database:
-        condition: service_healthy
+      - USE_NEON=false
+      - USE_SQLITE=true
+      - NEON_DATABASE_URL=postgresql://neondb_owner:npg_1Ze9uYGTfDcn@ep-dark-truth-b4xvk6bl-pooler.c-6.us-east-2.aws.neon.tech/neondb?sslmode=require
+    volumes:
+      - ./backend-django:/app
 
-  frontend:
+  frontend-next:
     build:
-      context: ./frontend
+      context: ./frontend-next
       dockerfile: Dockerfile
-    container_name: cybershield-frontend
+    container_name: astra-next-frontend
     ports:
-      - "3000:80"
+      - "3000:3000"
     depends_on:
-      - backend-go
-      - backend-python
-
-volumes:
-  postgres_data:
+      - backend-django
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1

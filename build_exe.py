@@ -1,33 +1,47 @@
 """
 ASTRA AI Platform - Standalone Desktop Application (.exe) Builder
-Combines Next.js frontend and Django backend into a single executable binary.
+Packages the ASTRA AI launcher into a standalone Windows .exe binary using PyInstaller.
 """
 import os
 import sys
+import shutil
 import subprocess
 
 def build_standalone_executable():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    launcher_script = os.path.join(base_dir, "astra_app_launcher.py")
+
     print("==========================================================")
-    print("      ASTRA AI - STANDALONE DESKTOP APPLICATION BUILDER   ")
+    print("      ASTRA AI - STANDALONE DESKTOP EXECUTABLE BUILDER    ")
     print("==========================================================")
-    print("Target Stack: Next.js + Django REST + Neon DB / SQLite")
+    print(f"Base Directory: {base_dir}")
+    print(f"Target Launcher: {launcher_script}")
     print("")
 
     pyinstaller_cmd = [
-        "pyinstaller",
+        sys.executable,
+        "-m",
+        "PyInstaller",
         "--noconfirm",
-        "--onedir",
+        "--clean",
+        "--onefile",
         "--windowed",
-        "--name=ASTRA_AI_System",
-        "backend-django/manage.py"
+        "--name=ASTRA_AI",
+        f"--distpath={base_dir}",
+        launcher_script
     ]
 
-    print(f"Executing build command: {' '.join(pyinstaller_cmd)}")
+    print(f"Executing: {' '.join(pyinstaller_cmd)}")
     try:
-        subprocess.run(pyinstaller_cmd, check=True)
-        print("\nSUCCESS: ASTRA_AI_System.exe built successfully in dist/ASTRA_AI_System/")
-    except Exception as e:
-        print(f"\nNote: {e}")
+        res = subprocess.run(pyinstaller_cmd, cwd=base_dir, check=True)
+        exe_path = os.path.join(base_dir, "ASTRA_AI.exe")
+        if os.path.exists(exe_path):
+            size_mb = os.path.getsize(exe_path) / (1024 * 1024)
+            print(f"\nSUCCESS: ASTRA_AI.exe updated successfully! ({size_mb:.2f} MB)")
+            print(f"Binary Location: {exe_path}")
+    except subprocess.CalledProcessError as e:
+        print(f"\nBuild Error: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     build_standalone_executable()

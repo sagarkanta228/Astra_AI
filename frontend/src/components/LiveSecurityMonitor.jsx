@@ -15,7 +15,7 @@ export default function LiveSecurityMonitor() {
 
   const fetchStream = async () => {
     try {
-      const res = await fetch('http://localhost:8080/api/v1/live-monitor/stream');
+      const res = await fetch('http://localhost:8000/api/v1/live-monitor/stream');
       const data = await res.json();
       setEvents(data);
     } catch (e) {
