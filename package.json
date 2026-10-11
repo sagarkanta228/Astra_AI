@@ -1,15 +1,14 @@
-{
+﻿{
   "name": "astra-soc-platform",
   "version": "1.0.0",
   "private": true,
   "description": "ASTRA SOC - Enterprise Threat Defense & Security Operations Platform",
   "scripts": {
-    "dev": "npm --prefix frontend-next run dev",
-    "dev:next": "npm --prefix frontend-next run dev",
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
     "dev:backend": "cd backend-django && python manage.py runserver 0.0.0.0:8000",
-    "dev:vite": "npm --prefix frontend run dev",
-    "build": "npm --prefix frontend-next run build",
-    "start": "npm --prefix frontend-next start",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview",
     "app:launch": "ASTRA_AI.bat"
   }
 }

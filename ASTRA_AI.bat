@@ -24,7 +24,7 @@ if errorlevel 1 (
 :: Check if Next.js frontend is running on port 3000
 netstat -ano | findstr ":3000" >nul
 if errorlevel 1 (
-    echo [3/3] Starting Next.js Frontend on port 3000...
+    echo [3/3] Starting React.js Frontend on port 3000...
     start /b npm run dev >nul 2>&1
     timeout /t 3 /nobreak >nul
 ) else (

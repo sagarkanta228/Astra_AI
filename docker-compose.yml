@@ -1,4 +1,4 @@
-version: '3.8'
+﻿version: '3.8'
 
 services:
   backend-django:
@@ -11,18 +11,17 @@ services:
     environment:
       - USE_NEON=false
       - USE_SQLITE=true
-      - NEON_DATABASE_URL=postgresql://neondb_owner:npg_1Ze9uYGTfDcn@ep-dark-truth-b4xvk6bl-pooler.c-6.us-east-2.aws.neon.tech/neondb?sslmode=require
     volumes:
       - ./backend-django:/app
 
-  frontend-next:
+  frontend:
     build:
-      context: ./frontend-next
+      context: ./frontend
       dockerfile: Dockerfile
-    container_name: astra-next-frontend
+    container_name: astra-react-frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - backend-django
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+      - VITE_API_URL=http://localhost:8000/api/v1

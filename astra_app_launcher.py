@@ -1,6 +1,6 @@
 """
 ASTRA AI SOC Platform - Standalone Desktop Application Launcher
-Manages Next.js Frontend + Django REST Backend lifecycle and opens native app window.
+Manages React.js Frontend + Django REST Backend lifecycle and opens native app window.
 """
 import os
 import sys
