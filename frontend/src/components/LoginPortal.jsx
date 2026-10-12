@@ -229,7 +229,7 @@ export default function LoginPortal({ onLoginSuccess, openSecOpsModal }) {
                 <span className="text-[10px] text-[#94A3B8]">Click to Auto-Fill</span>
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <button
                   type="button"
                   className="p-2 rounded-lg bg-[#11141c] hover:bg-[#181d28] border border-[#ef4444]/30 hover:border-[#ef4444] text-left transition-all cursor-pointer flex flex-col gap-0.5"
@@ -237,9 +237,21 @@ export default function LoginPortal({ onLoginSuccess, openSecOpsModal }) {
                 >
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#ef4444]"></span>
-                    <span className="text-[11px] font-bold text-white">SOC Analyst (Admin)</span>
+                    <span className="text-[11px] font-bold text-white">SOC Analyst</span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#94A3B8]">admin@astra.internal</span>
+                  <span className="text-[10px] font-mono text-[#94A3B8] truncate">admin@astra.internal</span>
+                </button>
+
+                <button
+                  type="button"
+                  className="p-2 rounded-lg bg-[#11141c] hover:bg-[#181d28] border border-[#f59e0b]/40 hover:border-[#f59e0b] text-left transition-all cursor-pointer flex flex-col gap-0.5"
+                  onClick={() => fillQuickCredentials('tanmayapany09@gmail.com', 'Tanmaya123')}
+                >
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></span>
+                    <span className="text-[11px] font-bold text-white">Admin (Tanmaya)</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-[#94A3B8] truncate">tanmayapany09...</span>
                 </button>
 
                 <button
@@ -251,7 +263,7 @@ export default function LoginPortal({ onLoginSuccess, openSecOpsModal }) {
                     <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6]"></span>
                     <span className="text-[11px] font-bold text-white">Standard User</span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#94A3B8]">user@astra.internal</span>
+                  <span className="text-[10px] font-mono text-[#94A3B8] truncate">user@astra.internal</span>
                 </button>
               </div>
 

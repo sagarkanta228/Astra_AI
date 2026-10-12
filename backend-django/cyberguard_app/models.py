@@ -65,3 +65,24 @@ class UserAccount(models.Model):
     def __str__(self):
         return f"{self.full_name} ({self.email}) - {self.role}"
 
+class UploadedThreatFile(models.Model):
+    file_id = models.CharField(max_length=64, primary_key=True)
+    file_name = models.CharField(max_length=255)
+    file_type = models.CharField(max_length=64, default="video")
+    file_size = models.BigIntegerField(default=0)
+    file_path = models.CharField(max_length=512, blank=True)
+    mime_type = models.CharField(max_length=128, blank=True)
+    sha256 = models.CharField(max_length=64, blank=True)
+    uploaded_by = models.CharField(max_length=128, default="Tanmaya Pany (Admin)")
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    analysis_status = models.CharField(max_length=32, default="ANALYZED")
+    risk_score = models.IntegerField(default=85)
+    severity = models.CharField(max_length=32, default="HIGH")
+    threat_category = models.CharField(max_length=128, default="Synthetic Media / Deepfake")
+    detection_summary = models.TextField(blank=True)
+    indicators = models.JSONField(default=list)
+    evidence = models.JSONField(default=list)
+
+    def __str__(self):
+        return f"{self.file_name} ({self.file_type}) - Risk: {self.risk_score}"
+
